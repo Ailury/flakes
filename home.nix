@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  # TODO please change the username & home directory to your own
   home.username = "ail";
   home.homeDirectory = "/home/ail";
+
+  # link the configuration file in current directory to the specified location in home directory
+  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
   # link all files in `./scripts` to `~/.config/i3/scripts`
   # home.file.".config/i3/scripts" = {
@@ -11,6 +15,10 @@
   #   executable = true;  # make all files executable
   # };
 
+  # encode the file content in nix configuration file directly
+  # home.file.".xxx".text = ''
+  #     xxx
+  # '';
 
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
@@ -34,7 +42,7 @@
 
     # utils
     ripgrep # recursively searches directories for a regex pattern
-    jq
+    jq # A lightweight and flexible command-line JSON processor
     yq-go # yaml processor https://github.com/mikefarah/yq
     exa # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
@@ -94,8 +102,10 @@
     userEmail = "aileris@proton.me";
   };
 
+  # starship - an customizable prompt for any shell
   programs.starship = {
     enable = true;
+    # custom settings
     settings = {
       add_newline = false;
       aws.disabled = true;
@@ -107,6 +117,7 @@
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = {
     enable = true;
+    # custom settings
     settings = {
       env.TERM = "xterm-256color";
       font = {
@@ -121,6 +132,7 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+    # TODO add your custom bashrc here
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
